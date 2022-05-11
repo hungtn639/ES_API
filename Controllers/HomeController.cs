@@ -232,12 +232,12 @@ namespace ES_API.Controllers
         }
 
         [HttpPost]
-        [Route("AddDocument/{index}/{jsonDocumentAsString}")]
-        public ContentResult AddDocument(string index, string jsonDocumentAsString)
+        [Route("AddDocument/{index}/{id}/{jsonDocumentAsString}")]
+        public ContentResult AddDocument(string index, string id, string jsonDocumentAsString)
         {
             try
             {
-                response = client.PostAsync(index + "/_doc", new StringContent(jsonDocumentAsString, Encoding.UTF8, "application/json")).Result;
+                response = client.PostAsync(index + "/_doc/" + id, new StringContent(jsonDocumentAsString, Encoding.UTF8, "application/json")).Result;
                 if (!response.IsSuccessStatusCode)
                 {
                     return new ContentResult
