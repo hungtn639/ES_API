@@ -163,13 +163,12 @@ namespace ES_API.Controllers
         }
 
         [HttpGet]
-        [Route("SearchDocuments/{index}/{query}")]
-        public ContentResult SearchDocuments(string index, string query)
+        [Route("SearchDocuments/{index}/{jsonQueryAsString}")]
+        public ContentResult SearchDocuments(string index, string jsonQueryAsString)
         {
             try
             {
-                var content = "{\"query\":{\"query_string\":{\"query\":\"" + query + "\"}}}";
-                response = client.PostAsync(index + "/_search", new StringContent(content, Encoding.UTF8, "application/json")).Result;
+                response = client.PostAsync(index + "/_search", new StringContent(jsonQueryAsString, Encoding.UTF8, "application/json")).Result;
                 if (!response.IsSuccessStatusCode)
                 {
                     return new ContentResult
